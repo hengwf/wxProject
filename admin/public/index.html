@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>益智闯关 - 后台管理系统</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f7fa;
+      min-height: 100vh;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #4a90d9 0%, #357abd 100%);
+      color: white;
+      padding: 20px 30px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .header h1 {
+      font-size: 24px;
+      font-weight: 600;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    
+    .stats-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .stat-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    .stat-card .value {
+      font-size: 36px;
+      font-weight: 700;
+      color: #4a90d9;
+    }
+    
+    .stat-card .label {
+      font-size: 14px;
+      color: #999;
+      margin-top: 8px;
+    }
+    
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .tab {
+      padding: 10px 20px;
+      background: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      color: #666;
+      transition: all 0.3s;
+    }
+    
+    .tab.active {
+      background: #4a90d9;
+      color: white;
+    }
+    
+    .tab:hover {
+      background: #e8f0fe;
+    }
+    
+    .tab.active:hover {
+      background: #357abd;
+    }
+    
+    .content {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 20px;
+    }
+    
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .table th, .table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .table th {
+      background: #f8f9fa;
+      font-weight: 600;
+      color: #333;
+    }
+    
+    .table tr:hover {
+      background: #f8f9fa;
+    }
+    
+    .btn {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      margin-right: 5px;
+      transition: all 0.3s;
+    }
+    
+    .btn-edit {
+      background: #ffc107;
+      color: #333;
+    }
+    
+    .btn-delete {
+      background: #dc3545;
+      color: white;
+    }
+    
+    .btn-add {
+      background: #4a90d9;
+      color: white;
+      padding: 10px 20px;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    
+    .btn:hover {
+      opacity: 0.8;
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    
+    .modal.show {
+      display: flex;
+    }
+    
+    .modal-content {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      width: 90%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    
+    .modal-content h3 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: #333;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    
+    .form-group textarea {
+      height: 80px;
+      resize: vertical;
+    }
+    
+    .form-group .options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .form-group .options input {
+      width: calc(100% - 30px);
+      display: inline-block;
+    }
+    
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      justify-content: flex-end;
+    }
+    
+    .btn-cancel {
+      background: #6c757d;
+      color: white;
+    }
+    
+    .btn-save {
+      background: #4a90d9;
+      color: white;
+    }
+    
+    .category-selector {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .category-btn {
+      padding: 8px 16px;
+      border: 2px solid #ddd;
+      background: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .category-btn.active {
+      border-color: #4a90d9;
+      background: #e8f0fe;
+      color: #4a90d9;
+    }
+    
+    .level-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    
+    .level-tab {
+      padding: 6px 12px;
+      border: 1px solid #ddd;
+      background: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    
+    .level-tab.active {
+      background: #4a90d9;
+      color: white;
+      border-color: #4a90d9;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🧠 益智闯关 - 后台管理系统</h1>
+  </div>
+  
+  <div class="container">
+    <div class="stats-cards">
+      <div class="stat-card">
+        <div class="value" id="totalQuestions">0</div>
+        <div class="label">总题目数</div>
+      </div>
+      <div class="stat-card">
+        <div class="value" id="totalLevels">0</div>
+        <div class="label">总关卡数</div>
+      </div>
+      <div class="stat-card">
+        <div class="value" id="totalCategories">0</div>
+        <div class="label">分类数量</div>
+      </div>
+    </div>
+    
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('questions')">题库管理</button>
+      <button class="tab" onclick="showTab('stats')">数据统计</button>
+    </div>
+    
+    <div id="questionsTab" class="content">
+      <div class="category-selector">
+        <button class="category-btn active" data-category="life" onclick="selectCategory('life')">生活常识</button>
+        <button class="category-btn" data-category="entertainment" onclick="selectCategory('entertainment')">影视娱乐</button>
+        <button class="category-btn" data-category="history" onclick="selectCategory('history')">历史人文</button>
+        <button class="category-btn" data-category="general" onclick="selectCategory('general')">综合知识</button>
+      </div>
+      
+      <div class="level-tabs" id="levelTabs">
+      </div>
+      
+      <button class="btn btn-add" onclick="openAddModal()">+ 添加题目</button>
+      
+      <table class="table" id="questionsTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>题目</th>
+            <th>答案</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    
+    <div id="statsTab" class="content" style="display: none;">
+      <h3>题库统计</h3>
+      <div id="statsContent"></div>
+    </div>
+  </div>
+  
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h3 id="modalTitle">添加题目</h3>
+      <form id="questionForm">
+        <div class="form-group">
+          <label>题目内容</label>
+          <textarea id="question" required></textarea>
+        </div>
+        <div class="form-group">
+          <label>选项</label>
+          <div class="options">
+            <input type="text" id="optionA" placeholder="选项A" required>
+            <input type="text" id="optionB" placeholder="选项B" required>
+            <input type="text" id="optionC" placeholder="选项C" required>
+            <input type="text" id="optionD" placeholder="选项D" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>正确答案</label>
+          <select id="answer" required>
+            <option value="0">A</option>
+            <option value="1">B</option>
+            <option value="2">C</option>
+            <option value="3">D</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>提示</label>
+          <input type="text" id="hint" placeholder="可选：答题提示">
+        </div>
+        <div class="form-group">
+          <label>解析</label>
+          <textarea id="explanation" placeholder="可选：答案解析"></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-cancel" onclick="closeModal()">取消</button>
+          <button type="submit" class="btn btn-save">保存</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <script>
+    let currentCategory = 'life';
+    let currentLevel = 1;
+    let editingQuestion = null;
+    
+    async function loadStats() {
+      const res = await fetch('/api/stats');
+      const data = await res.json();
+      
+      document.getElementById('totalQuestions').textContent = data.total;
+      document.getElementById('totalCategories').textContent = Object.keys(data).length - 1;
+      
+      let totalLevels = 0;
+      for (const category in data) {
+        if (category !== 'total') {
+          totalLevels += data[category].levels;
+        }
+      }
+      document.getElementById('totalLevels').textContent = totalLevels;
+    }
+    
+    async function loadQuestions() {
+      const res = await fetch(`/api/questions/${currentCategory}`);
+      const data = await res.json();
+      
+      const levelTabs = document.getElementById('levelTabs');
+      levelTabs.innerHTML = '';
+      
+      data.forEach(level => {
+        const btn = document.createElement('button');
+        btn.className = `level-tab ${level.level === currentLevel ? 'active' : ''}`;
+        btn.textContent = `第${level.level}关`;
+        btn.onclick = () => selectLevel(level.level);
+        levelTabs.appendChild(btn);
+      });
+      
+      renderQuestions(data);
+    }
+    
+    function selectCategory(category) {
+      currentCategory = category;
+      currentLevel = 1;
+      
+      document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      loadQuestions();
+    }
+    
+    function selectLevel(level) {
+      currentLevel = level;
+      
+      document.querySelectorAll('.level-tab').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      loadQuestions();
+    }
+    
+    function renderQuestions(data) {
+      const tbody = document.querySelector('#questionsTable tbody');
+      tbody.innerHTML = '';
+      
+      const levelData = data.find(l => l.level === currentLevel);
+      if (!levelData || !levelData.questions) {
+        tbody.innerHTML = '<tr><td colspan="4" style="text-align: center;">暂无题目</td></tr>';
+        return;
+      }
+      
+      levelData.questions.forEach(q => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${q.id}</td>
+          <td style="max-width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${q.question}</td>
+          <td>${['A', 'B', 'C', 'D'][q.answer]}</td>
+          <td>
+            <button class="btn btn-edit" onclick="editQuestion(${q.id})">编辑</button>
+            <button class="btn btn-delete" onclick="deleteQuestion(${q.id})">删除</button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+    
+    function showTab(tab) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      document.getElementById('questionsTab').style.display = tab === 'questions' ? 'block' : 'none';
+      document.getElementById('statsTab').style.display = tab === 'stats' ? 'block' : 'none';
+      
+      if (tab === 'stats') {
+        loadStatsDetail();
+      }
+    }
+    
+    async function loadStatsDetail() {
+      const res = await fetch('/api/stats');
+      const data = await res.json();
+      
+      const content = document.getElementById('statsContent');
+      let html = '<table class="table"><thead><tr><th>分类</th><th>关卡数</th><th>题目数</th></tr></thead><tbody>';
+      
+      const categoryNames = {
+        life: '生活常识',
+        entertainment: '影视娱乐',
+        history: '历史人文',
+        general: '综合知识'
+      };
+      
+      for (const category in data) {
+        if (category !== 'total') {
+          html += `<tr><td>${categoryNames[category] || category}</td><td>${data[category].levels}</td><td>${data[category].questions}</td></tr>`;
+        }
+      }
+      
+      html += `</tbody></table><p style="margin-top: 20px; color: #666;">总计：${data.total}道题目</p>`;
+      content.innerHTML = html;
+    }
+    
+    function openAddModal() {
+      editingQuestion = null;
+      document.getElementById('modalTitle').textContent = '添加题目';
+      document.getElementById('question').value = '';
+      document.getElementById('optionA').value = '';
+      document.getElementById('optionB').value = '';
+      document.getElementById('optionC').value = '';
+      document.getElementById('optionD').value = '';
+      document.getElementById('answer').value = '0';
+      document.getElementById('hint').value = '';
+      document.getElementById('explanation').value = '';
+      document.getElementById('modal').classList.add('show');
+    }
+    
+    function closeModal() {
+      document.getElementById('modal').classList.remove('show');
+      editingQuestion = null;
+    }
+    
+    async function editQuestion(id) {
+      const res = await fetch(`/api/questions/${currentCategory}`);
+      const data = await res.json();
+      const levelData = data.find(l => l.level === currentLevel);
+      const question = levelData.questions.find(q => q.id === id);
+      
+      if (question) {
+        editingQuestion = question;
+        document.getElementById('modalTitle').textContent = '编辑题目';
+        document.getElementById('question').value = question.question;
+        document.getElementById('optionA').value = question.options[0];
+        document.getElementById('optionB').value = question.options[1];
+        document.getElementById('optionC').value = question.options[2];
+        document.getElementById('optionD').value = question.options[3];
+        document.getElementById('answer').value = question.answer;
+        document.getElementById('hint').value = question.hint || '';
+        document.getElementById('explanation').value = question.explanation || '';
+        document.getElementById('modal').classList.add('show');
+      }
+    }
+    
+    async function deleteQuestion(id) {
+      if (!confirm('确定要删除这道题目吗？')) return;
+      
+      const res = await fetch(`/api/questions/${currentCategory}/${currentLevel}/${id}`, {
+        method: 'DELETE'
+      });
+      const data = await res.json();
+      
+      if (data.success) {
+        alert('删除成功');
+        loadQuestions();
+      } else {
+        alert('删除失败：' + data.message);
+      }
+    }
+    
+    document.getElementById('questionForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const questionData = {
+        question: document.getElementById('question').value,
+        options: [
+          document.getElementById('optionA').value,
+          document.getElementById('optionB').value,
+          document.getElementById('optionC').value,
+          document.getElementById('optionD').value
+        ],
+        answer: parseInt(document.getElementById('answer').value),
+        hint: document.getElementById('hint').value || '',
+        explanation: document.getElementById('explanation').value || ''
+      };
+      
+      let res;
+      if (editingQuestion) {
+        res = await fetch(`/api/questions/${currentCategory}/${currentLevel}/${editingQuestion.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(questionData)
+        });
+      } else {
+        res = await fetch('/api/questions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            category: currentCategory,
+            level: currentLevel,
+            questionData
+          })
+        });
+      }
+      
+      const data = await res.json();
+      
+      if (data.success) {
+        alert(editingQuestion ? '更新成功' : '添加成功');
+        closeModal();
+        loadQuestions();
+        loadStats();
+      } else {
+        alert('保存失败：' + data.message);
+      }
+    });
+    
+    loadStats();
+    loadQuestions();
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<view class="container">
+  <view class="result-card card" style="background: {{isPass ? 'linear-gradient(135deg, #52c41a 0%, #389e0d 100%)' : 'linear-gradient(135deg, #fa8c16 0%, #d46b08 100%)'}}">
+    <view class="result-icon">{{isPass ? '🎉' : '💪'}}</view>
+    <view class="result-title">{{isPass ? '恭喜通关！' : '再接再厉！'}}</view>
+    <view class="result-sub">{{isPass ? '成功解锁下一关' : '正确率未达标，请重试'}}</view>
+  </view>
+
+  <view class="stats-card card">
+    <view class="stats-row">
+      <view class="stat-item">
+        <view class="stat-value">{{correctCount}}</view>
+        <view class="stat-label">答对题数</view>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <view class="stat-value">{{totalQuestions}}</view>
+        <view class="stat-label">总题数</view>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <view class="stat-value">{{correctRate}}%</view>
+        <view class="stat-label">正确率</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="rate-card card">
+    <view class="rate-title">评级</view>
+    <view class="rate-stars">{{getStars()}}</view>
+    <view class="rate-comment">{{getComment()}}</view>
+  </view>
+
+  <view class="action-buttons">
+    <view class="btn-secondary retry-btn" bindtap="retry">
+      <text>🔄 重新挑战</text>
+    </view>
+    <view 
+      class="btn-primary next-btn" 
+      wx:if="{{isPass}}"
+      bindtap="nextLevel"
+    >
+      <text>▶ 下一关</text>
+    </view>
+    <view 
+      class="btn-primary next-btn" 
+      wx:else
+      bindtap="backToLevels"
+    >
+      <text>← 返回关卡</text>
+    </view>
+  </view>
+</view>

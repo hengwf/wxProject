@@ -1,0 +1,65 @@
+.privacy-card {
+  padding: 30rpx !important;
+}
+
+.privacy-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 30rpx;
+  text-align: center;
+}
+
+.policy-section {
+  margin-bottom: 30rpx;
+}
+
+.section-header {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #4a90d9;
+  margin-bottom: 16rpx;
+}
+
+.policy-content {
+  padding-left: 20rpx;
+}
+
+.policy-item {
+  font-size: 26rpx;
+  color: #333333;
+  line-height: 1.6;
+  margin-bottom: 12rpx;
+}
+
+.policy-sub {
+  font-size: 26rpx;
+  color: #666666;
+  line-height: 1.6;
+  margin-bottom: 8rpx;
+}
+
+.policy-contact {
+  background: #f5f7fa;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  margin-top: 20rpx;
+}
+
+.contact-title {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 12rpx;
+}
+
+.contact-content {
+  font-size: 24rpx;
+  color: #666666;
+  line-height: 1.6;
+}
+
+.back-btn {
+  margin-top: 30rpx;
+  text-align: center;
+}

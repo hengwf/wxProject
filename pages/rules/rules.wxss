@@ -1,0 +1,44 @@
+.rules-card {
+  padding: 30rpx !important;
+}
+
+.rules-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 30rpx;
+  text-align: center;
+}
+
+.rule-section {
+  margin-bottom: 30rpx;
+}
+
+.rule-section:last-child {
+  margin-bottom: 0;
+}
+
+.section-header {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #4a90d9;
+  margin-bottom: 16rpx;
+}
+
+.rule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  padding-left: 20rpx;
+}
+
+.rule-item {
+  font-size: 26rpx;
+  color: #666666;
+  line-height: 1.6;
+}
+
+.back-btn {
+  margin-top: 30rpx;
+  text-align: center;
+}
