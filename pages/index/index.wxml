@@ -1,0 +1,51 @@
+<view class="container">
+  <view class="header">
+    <view class="logo">
+      <text class="logo-icon">🧠</text>
+      <text class="logo-text">益智闯关</text>
+    </view>
+    <view class="subtitle">挑战你的知识库</view>
+  </view>
+
+  <view class="stats-card card">
+    <view class="stats-title">今日答题</view>
+    <view class="stats-value">{{todayQuestions}}</view>
+    <view class="stats-sub">累计答题 {{totalQuestions}} 题</view>
+  </view>
+
+  <view class="categories-title">题库分类</view>
+  <view class="categories">
+    <view 
+      wx:for="{{categories}}" 
+      wx:key="id" 
+      class="category-card card"
+      style="background: linear-gradient(135deg, {{item.color}}15 0%, {{item.color}}05 100%);"
+      bindtap="goToLevels"
+      data-category="{{item.id}}"
+    >
+      <view class="category-icon">{{item.icon}}</view>
+      <view class="category-info">
+        <view class="category-name">{{item.name}}</view>
+        <view class="category-progress">
+          <view class="progress-bar">
+            <view 
+              class="progress-fill" 
+              style="width: {{getProgress(item.id)}}%; background: {{item.color}};"
+            ></view>
+          </view>
+          <text class="progress-text">{{getCategoryProgress(item.id)}}</text>
+        </view>
+        <view class="category-level">已解锁 {{getUnlockedLevels(item.id)}}/{{totalLevels}} 关</view>
+      </view>
+      <view class="category-arrow">→</view>
+    </view>
+  </view>
+
+  <view class="tips-card card">
+    <view class="tips-icon">💡</view>
+    <view class="tips-content">
+      <view class="tips-title">答题小贴士</view>
+      <view class="tips-text">{{currentTip}}</view>
+    </view>
+  </view>
+</view>

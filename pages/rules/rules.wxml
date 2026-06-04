@@ -1,0 +1,56 @@
+<view class="container">
+  <view class="rules-card card">
+    <view class="rules-title">📋 游戏规则</view>
+    
+    <view class="rule-section">
+      <view class="section-header">🎮 基本玩法</view>
+      <view class="rule-list">
+        <view class="rule-item">• 选择题库分类，进入关卡列表</view>
+        <view class="rule-item">• 每个分类有10个关卡，逐级解锁</view>
+        <view class="rule-item">• 每关5道题目，每题4个选项</view>
+        <view class="rule-item">• 答对题目自动进入下一题</view>
+      </view>
+    </view>
+
+    <view class="rule-section">
+      <view class="section-header">✅ 通关条件</view>
+      <view class="rule-list">
+        <view class="rule-item">• 每关正确率达到60%即可通关</view>
+        <view class="rule-item">• 通关后自动解锁下一关</view>
+        <view class="rule-item">• 失败可重新挑战当前关卡</view>
+        <view class="rule-item">• 所有关卡通关后解锁全部题库</view>
+      </view>
+    </view>
+
+    <view class="rule-section">
+      <view class="section-header">💡 提示功能</view>
+      <view class="rule-list">
+        <view class="rule-item">• 遇到难题可点击提示按钮</view>
+        <view class="rule-item">• 提示会给出答案线索</view>
+        <view class="rule-item">• 合理使用提示提高正确率</view>
+      </view>
+    </view>
+
+    <view class="rule-section">
+      <view class="section-header">📊 数据统计</view>
+      <view class="rule-list">
+        <view class="rule-item">• 记录总答题数和正确率</view>
+        <view class="rule-item">• 记录各分类通关进度</view>
+        <view class="rule-item">• 数据本地存储，换设备可迁移</view>
+      </view>
+    </view>
+
+    <view class="rule-section">
+      <view class="section-header">🏆 成就系统</view>
+      <view class="rule-list">
+        <view class="rule-item">• 完成更多关卡获得成就感</view>
+        <view class="rule-item">• 挑战高正确率获得评级</view>
+        <view class="rule-item">• 持续答题积累知识</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="back-btn btn-primary" bindtap="goBack">
+    返回首页
+  </view>
+</view>

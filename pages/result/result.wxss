@@ -1,0 +1,99 @@
+.result-card {
+  text-align: center;
+  padding: 40rpx !important;
+  color: #ffffff;
+  margin-bottom: 30rpx;
+}
+
+.result-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.result-title {
+  font-size: 40rpx;
+  font-weight: 700;
+  margin-bottom: 12rpx;
+}
+
+.result-sub {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+
+.stats-card {
+  margin-bottom: 30rpx;
+}
+
+.stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.stat-item {
+  text-align: center;
+  flex: 1;
+}
+
+.stat-value {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #4a90d9;
+  margin-bottom: 8rpx;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.stat-divider {
+  width: 2rpx;
+  height: 60rpx;
+  background: #e0e0e0;
+}
+
+.rate-card {
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.rate-title {
+  font-size: 28rpx;
+  color: #999999;
+  margin-bottom: 16rpx;
+}
+
+.rate-stars {
+  font-size: 48rpx;
+  margin-bottom: 16rpx;
+}
+
+.rate-comment {
+  font-size: 28rpx;
+  color: #666666;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 20rpx;
+}
+
+.retry-btn, .next-btn {
+  flex: 1;
+  padding: 28rpx !important;
+  font-size: 30rpx;
+}
+
+.retry-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.next-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,38 @@
+<view class="container">
+  <view class="category-header card">
+    <view class="category-icon">{{currentCategory.icon}}</view>
+    <view class="category-info">
+      <view class="category-name">{{currentCategory.name}}</view>
+      <view class="category-desc">{{categoryDesc}}</view>
+    </view>
+  </view>
+
+  <view class="levels-title">选择关卡</view>
+  <view class="levels-grid">
+    <view 
+      wx:for="{{levels}}" 
+      wx:key="level"
+      class="level-item card"
+      bindtap="goToQuiz"
+      data-level="{{item.level}}"
+    >
+      <view class="level-number">{{item.level}}</view>
+      <view class="level-status">
+        <text wx:if="{{item.status === 'locked'}}" class="status-locked">🔒</text>
+        <text wx:elif="{{item.status === 'completed'}}" class="status-completed">✓</text>
+        <text wx:else class="status-available">▶</text>
+      </view>
+      <view class="level-label">第{{item.level}}关</view>
+    </view>
+  </view>
+
+  <view class="rules-card card">
+    <view class="rules-title">📋 闯关规则</view>
+    <view class="rules-list">
+      <view class="rule-item">• 每关5道题目，答对60%即可通关</view>
+      <view class="rule-item">• 必须通关上一关才能解锁下一关</view>
+      <view class="rule-item">• 遇到难题可点击提示获取帮助</view>
+      <view class="rule-item">• 通关后获得成就感和知识积累</view>
+    </view>
+  </view>
+</view>

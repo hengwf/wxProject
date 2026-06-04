@@ -1,0 +1,70 @@
+<view class="container">
+  <view class="privacy-card card">
+    <view class="privacy-title">🔒 隐私政策</view>
+    
+    <view class="policy-section">
+      <view class="section-header">一、数据收集</view>
+      <view class="policy-content">
+        <view class="policy-item">1. 本小程序仅收集必要的用户数据，包括：</view>
+        <view class="policy-sub">• 答题记录：包括答题数量、正确率、通关进度等</view>
+        <view class="policy-sub">• 用户偏好：题库分类选择、关卡选择等</view>
+      </view>
+    </view>
+
+    <view class="policy-section">
+      <view class="section-header">二、数据存储</view>
+      <view class="policy-content">
+        <view class="policy-item">1. 用户数据仅存储在用户设备本地，不上传至服务器</view>
+        <view class="policy-item">2. 用户可随时清除本地数据</view>
+        <view class="policy-item">3. 数据迁移需用户手动操作</view>
+      </view>
+    </view>
+
+    <view class="policy-section">
+      <view class="section-header">三、数据使用</view>
+      <view class="policy-content">
+        <view class="policy-item">1. 收集的数据仅用于：</view>
+        <view class="policy-sub">• 提供个性化答题体验</view>
+        <view class="policy-sub">• 记录用户游戏进度</view>
+        <view class="policy-sub">• 优化产品功能</view>
+      </view>
+    </view>
+
+    <view class="policy-section">
+      <view class="section-header">四、数据安全</view>
+      <view class="policy-content">
+        <view class="policy-item">1. 我们重视用户数据安全：</view>
+        <view class="policy-sub">• 数据仅存储在用户设备本地</view>
+        <view class="policy-sub">• 不向第三方分享用户数据</view>
+        <view class="policy-sub">• 采用安全的数据存储方式</view>
+      </view>
+    </view>
+
+    <view class="policy-section">
+      <view class="section-header">五、用户权利</view>
+      <view class="policy-content">
+        <view class="policy-item">1. 用户有权：</view>
+        <view class="policy-sub">• 查看自己的数据</view>
+        <view class="policy-sub">• 删除自己的数据</view>
+        <view class="policy-sub">• 拒绝数据收集（可能影响部分功能）</view>
+      </view>
+    </view>
+
+    <view class="policy-section">
+      <view class="section-header">六、政策更新</view>
+      <view class="policy-content">
+        <view class="policy-item">1. 本隐私政策可能会更新，更新后会及时通知用户</view>
+        <view class="policy-item">2. 继续使用小程序即表示同意更新后的政策</view>
+      </view>
+    </view>
+
+    <view class="policy-contact">
+      <view class="contact-title">联系我们</view>
+      <view class="contact-content">如有任何疑问或建议，请通过小程序内的反馈功能联系我们。</view>
+    </view>
+  </view>
+
+  <view class="back-btn btn-primary" bindtap="goBack">
+    返回
+  </view>
+</view>
