@@ -48,4 +48,6 @@
       <view class="tips-text">{{currentTip}}</view>
     </view>
   </view>
+
+  <view class="ad-placeholder"></view>
 </view>

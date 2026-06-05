@@ -6,7 +6,7 @@ Page({
     currentCategory: {},
     categoryDesc: '',
     levels: [],
-    totalLevels: 10
+    totalLevels: 66
   },
 
   onLoad: function (options) {
@@ -14,6 +14,10 @@ Page({
     this.setData({
       categoryId: categoryId
     })
+    this.initPage()
+  },
+
+  onShow: function () {
     this.initPage()
   },
 

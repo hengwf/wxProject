@@ -1,11 +1,12 @@
 const app = getApp()
+const adManager = require('../../utils/adManager.js')
 
 Page({
   data: {
     categories: [],
     todayQuestions: 0,
     totalQuestions: 0,
-    totalLevels: 10,
+    totalLevels: 66,
     currentTip: '',
     tips: [
       '遇到难题可以点击提示按钮获取帮助哦！',
@@ -18,6 +19,24 @@ Page({
   },
 
   onLoad: function () {
+    this.refreshData()
+    this.initBannerAd()
+  },
+
+  onShow: function () {
+    this.refreshData()
+    adManager.showBannerAd()
+  },
+
+  onHide: function () {
+    adManager.hideBannerAd()
+  },
+
+  onUnload: function () {
+    adManager.destroyBannerAd()
+  },
+
+  refreshData: function () {
     this.setData({
       categories: app.globalData.categories,
       todayQuestions: app.globalData.userData.todayQuestions,
@@ -26,11 +45,9 @@ Page({
     })
   },
 
-  onShow: function () {
-    this.setData({
-      todayQuestions: app.globalData.userData.todayQuestions,
-      totalQuestions: app.globalData.userData.totalQuestions
-    })
+  initBannerAd: function () {
+    adManager.initBannerAd()
+    adManager.showBannerAd()
   },
 
   getProgress: function (categoryId) {

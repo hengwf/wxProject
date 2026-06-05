@@ -1,3 +1,5 @@
+const adManager = require('../../utils/adManager.js')
+
 Page({
   data: {
     categoryId: '',
@@ -5,7 +7,8 @@ Page({
     correctCount: 0,
     totalQuestions: 0,
     isPass: false,
-    correctRate: 0
+    correctRate: 0,
+    adShown: false
   },
 
   onLoad: function (options) {
@@ -24,6 +27,27 @@ Page({
       isPass: isPass,
       correctRate: correctRate
     })
+
+    this.initInterstitialAd()
+  },
+
+  onShow: function () {
+    if (!this.data.adShown) {
+      this.delayShowAd()
+    }
+  },
+
+  initInterstitialAd: function () {
+    adManager.initInterstitialAd()
+  },
+
+  delayShowAd: function () {
+    setTimeout(() => {
+      adManager.showInterstitialAd()
+      this.setData({
+        adShown: true
+      })
+    }, 1000)
   },
 
   getStars: function () {

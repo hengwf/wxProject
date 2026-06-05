@@ -1,5 +1,6 @@
 const app = getApp()
 const questions = require('../../data/questions.js')
+const adManager = require('../../utils/adManager.js')
 
 Page({
   data: {
@@ -14,7 +15,8 @@ Page({
     totalQuestions: 0,
     showHintModal: false,
     progressPercent: 0,
-    quizResults: []
+    quizResults: [],
+    hintUsed: false
   },
 
   onLoad: function (options) {
@@ -27,6 +29,7 @@ Page({
     })
     
     this.initQuestions()
+    this.initRewardedVideoAd()
   },
 
   initQuestions: function () {
@@ -59,8 +62,13 @@ Page({
       selectedAnswer: -1,
       showResult: false,
       progressPercent: 0,
-      quizResults: []
+      quizResults: [],
+      hintUsed: false
     })
+  },
+
+  initRewardedVideoAd: function () {
+    adManager.initRewardedVideoAd()
   },
 
   selectOption: function (e) {
@@ -98,7 +106,8 @@ Page({
       currentQuestion: this.data.questions[nextIndex],
       selectedAnswer: -1,
       showResult: false,
-      progressPercent: ((nextIndex + 1) / this.data.totalQuestions) * 100
+      progressPercent: ((nextIndex + 1) / this.data.totalQuestions) * 100,
+      hintUsed: false
     })
   },
 
@@ -116,9 +125,51 @@ Page({
   },
 
   showHint: function () {
-    this.setData({
-      showHintModal: true
+    if (this.data.hintUsed) {
+      this.setData({
+        showHintModal: true
+      })
+      return
+    }
+
+    wx.showModal({
+      title: '观看视频获取提示',
+      content: '观看一段短视频即可查看本题提示',
+      confirmText: '观看视频',
+      cancelText: '取消',
+      success: (res) => {
+        if (res.confirm) {
+          this.watchVideoForHint()
+        }
+      }
     })
+  },
+
+  watchVideoForHint: function () {
+    wx.showLoading({
+      title: '加载广告中...'
+    })
+
+    adManager.showRewardedVideoAd(
+      () => {
+        wx.hideLoading()
+        this.setData({
+          hintUsed: true,
+          showHintModal: true
+        })
+        wx.showToast({
+          title: '获得提示！',
+          icon: 'success'
+        })
+      },
+      (err) => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '广告加载失败，请稍后再试',
+          icon: 'none'
+        })
+      }
+    )
   },
 
   closeHint: function () {
