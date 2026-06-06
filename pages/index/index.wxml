@@ -48,4 +48,10 @@
       <view class="tips-text">{{currentTip}}</view>
     </view>
   </view>
+
+  <view class="nav-button">
+    <view class="btn-primary" bindtap="goToMine">
+      👤 我的
+    </view>
+  </view>
 </view>

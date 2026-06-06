@@ -58,5 +58,11 @@ Page({
     wx.navigateTo({
       url: `/pages/levels/levels?category=${categoryId}`
     })
+  },
+
+  goToMine: function () {
+    wx.navigateTo({
+      url: '/pages/mine/mine'
+    })
   }
 })

@@ -1,4 +1,4 @@
-const questions = {
+module.exports = {
   life: [
     {
       level: 1,
@@ -1808,5 +1808,3 @@ const questions = {
     }
   ]
 }
-
-module.exports = questions

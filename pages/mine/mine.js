@@ -97,5 +97,9 @@ Page({
         }
       }
     })
+  },
+
+  goToIndex: function () {
+    wx.navigateBack()
   }
 })

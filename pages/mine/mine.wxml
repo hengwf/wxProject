@@ -69,4 +69,10 @@
   <view class="clear-btn" bindtap="clearData">
     <text>🗑️ 清除数据</text>
   </view>
+
+  <view class="nav-button">
+    <view class="btn-primary" bindtap="goToIndex">
+      🏠 返回首页
+    </view>
+  </view>
 </view>

@@ -149,3 +149,8 @@
 .clear-btn:active {
   opacity: 0.7;
 }
+
+.nav-button {
+  margin-top: 20rpx;
+  text-align: center;
+}
