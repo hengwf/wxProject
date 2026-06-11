@@ -1,0 +1,40 @@
+<view class="container">
+  <!-- 空状态 -->
+  <view wx:if="{{isEmpty}}" class="empty-state">
+    <text class="empty-icon">📚</text>
+    <text class="empty-title">暂无错题</text>
+    <text class="empty-desc">做错的题目会自动收录到这里哦~</text>
+  </view>
+
+  <!-- 错题列表 -->
+  <view wx:else class="wrong-list">
+    <view class="list-header">
+      <text class="list-count">共 {{wrongQuestions.length}} 道错题</text>
+      <text class="clear-btn" bindtap="clearAll">清空</text>
+    </view>
+
+    <view
+      wx:for="{{wrongQuestions}}"
+      wx:key="id"
+      class="wrong-item"
+      bindtap="goToQuiz"
+      data-index="{{index}}"
+    >
+      <view class="wrong-content">
+        <view class="wrong-header">
+          <text class="wrong-category">{{item.category}}</text>
+          <text class="wrong-chapter">第{{item.chapter}}章</text>
+        </view>
+        <text class="wrong-question">{{item.question}}</text>
+        <view class="wrong-options">
+          <text wx:for="{{item.options}}" wx:for-item="opt" wx:key="{{index}}" class="wrong-option">
+            {{opt}}
+          </text>
+        </view>
+      </view>
+      <view class="wrong-actions" catchtap="removeWrong" data-id="{{item.id}}">
+        <text class="remove-btn">移除</text>
+      </view>
+    </view>
+  </view>
+</view>

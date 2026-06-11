@@ -6,6 +6,12 @@ class AdManager {
     this.bannerAdUnitId = 'adunit-你的Banner广告位ID'
     this.interstitialAdUnitId = 'adunit-你的插屏广告位ID'
     this.rewardedVideoAdUnitId = 'adunit-你的激励视频广告位ID'
+    // 检查广告API是否可用
+    this.isAdApiAvailable = {
+      banner: typeof wx.createBannerAd === 'function',
+      interstitial: typeof wx.createInterstitialAd === 'function',
+      rewardedVideo: typeof wx.createRewardedVideoAd === 'function'
+    }
   }
 
   initBannerAd(adUnitId) {
@@ -15,6 +21,12 @@ class AdManager {
     
     if (this.bannerAd) {
       return this.bannerAd
+    }
+
+    // 检查API是否可用
+    if (!this.isAdApiAvailable.banner) {
+      console.log('Banner广告API不可用（开发环境）')
+      return null
     }
 
     try {
@@ -43,6 +55,10 @@ class AdManager {
   }
 
   showBannerAd() {
+    if (!this.isAdApiAvailable.banner) {
+      console.log('Banner广告API不可用，跳过展示')
+      return
+    }
     if (this.bannerAd) {
       this.bannerAd.show().catch((err) => {
         console.error('Banner广告展示失败:', err)
@@ -51,12 +67,19 @@ class AdManager {
   }
 
   hideBannerAd() {
+    if (!this.isAdApiAvailable.banner) {
+      return
+    }
     if (this.bannerAd) {
       this.bannerAd.hide()
     }
   }
 
   destroyBannerAd() {
+    if (!this.isAdApiAvailable.banner) {
+      this.bannerAd = null
+      return
+    }
     if (this.bannerAd) {
       this.bannerAd.destroy()
       this.bannerAd = null
@@ -70,6 +93,11 @@ class AdManager {
     
     if (this.interstitialAd) {
       return this.interstitialAd
+    }
+
+    if (!this.isAdApiAvailable.interstitial) {
+      console.log('插屏广告API不可用（开发环境）')
+      return null
     }
 
     try {
@@ -97,6 +125,10 @@ class AdManager {
   }
 
   showInterstitialAd() {
+    if (!this.isAdApiAvailable.interstitial) {
+      console.log('插屏广告API不可用，跳过展示')
+      return
+    }
     if (this.interstitialAd) {
       this.interstitialAd.show().catch((err) => {
         console.error('插屏广告展示失败:', err)
@@ -111,6 +143,11 @@ class AdManager {
     
     if (this.rewardedVideoAd) {
       return this.rewardedVideoAd
+    }
+
+    if (!this.isAdApiAvailable.rewardedVideo) {
+      console.log('激励视频广告API不可用（开发环境）')
+      return null
     }
 
     try {
@@ -134,6 +171,11 @@ class AdManager {
   }
 
   showRewardedVideoAd(onSuccess, onError) {
+    if (!this.isAdApiAvailable.rewardedVideo) {
+      console.log('激励视频广告API不可用，跳过展示')
+      if (onError) onError('广告API不可用（开发环境）')
+      return
+    }
     if (!this.rewardedVideoAd) {
       if (onError) onError('广告未初始化')
       return

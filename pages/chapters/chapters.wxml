@@ -1,0 +1,34 @@
+<view class="container">
+  <!-- 顶部分类信息 -->
+  <view class="header">
+    <view class="back-btn" bindtap="goBack"><text>返回</text></view>
+    <view class="category-info">
+      <text class="category-icon">{{currentCategory.icon}}</text>
+      <text class="category-name">{{currentCategory.name}}</text>
+    </view>
+  </view>
+
+  <!-- 章节列表 -->
+  <view class="chapter-list">
+    <view
+      wx:for="{{chapters}}"
+      wx:key="id"
+      class="chapter-item {{item.status}}"
+      bindtap="goToQuiz"
+      data-chapter="{{item.id}}"
+    >
+      <view class="chapter-left">
+        <view class="chapter-num">{{item.id}}</view>
+        <view class="chapter-info">
+          <text class="chapter-name">{{item.name}}</text>
+          <text class="chapter-questions">{{item.questions}}题</text>
+        </view>
+      </view>
+      <view class="chapter-right">
+        <text wx:if="{{item.status === 'locked'}}" class="status-locked">🔒</text>
+        <text wx:elif="{{item.status === 'completed'}}" class="status-done">✅</text>
+        <text wx:else class="status-available">开始学习</text>
+      </view>
+    </view>
+  </view>
+</view>

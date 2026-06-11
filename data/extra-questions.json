@@ -1,0 +1,37 @@
+{
+  "life": [
+    {
+      "id": 30001,
+      "difficulty": "hard",
+      "category": "life",
+      "question": "334",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "answer": 0,
+      "hint": "1",
+      "explanation": "1"
+    },
+    {
+      "id": 30002,
+      "difficulty": "hard",
+      "category": "life",
+      "question": "12345",
+      "options": [
+        "11",
+        "33",
+        "22",
+        "44"
+      ],
+      "answer": 0,
+      "hint": "",
+      "explanation": ""
+    }
+  ],
+  "entertainment": [],
+  "history": [],
+  "general": []
+}

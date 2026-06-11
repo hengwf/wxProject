@@ -1,0 +1,75 @@
+<view class="container">
+  <!-- 返回按钮 -->
+  <view class="header">
+    <view class="back-btn" bindtap="goBack"><text>返回</text></view>
+    <text class="header-title">开通会员</text>
+  </view>
+
+  <!-- 会员状态 -->
+  <view wx:if="{{memberStatus === 'vip'}}" class="member-status-card">
+    <text class="member-icon">👑</text>
+    <text class="member-text">您已是尊贵的VIP会员</text>
+    <text class="member-expire">{{memberExpireTime}}</text>
+  </view>
+
+  <!-- 会员特权 -->
+  <view class="section">
+    <view class="section-title">会员特权</view>
+    <view class="privilege-list">
+      <view class="privilege-item">
+        <text class="privilege-icon">📚</text>
+        <text class="privilege-text">全部题库</text>
+      </view>
+      <view class="privilege-item">
+        <text class="privilege-icon">📝</text>
+        <text class="privilege-text">无限模拟考试</text>
+      </view>
+      <view class="privilege-item">
+        <text class="privilege-icon">📖</text>
+        <text class="privilege-text">无限错题本</text>
+      </view>
+      <view class="privilege-item">
+        <text class="privilege-icon">🚫</text>
+        <text class="privilege-text">去除广告</text>
+      </view>
+      <view class="privilege-item">
+        <text class="privilege-icon">📊</text>
+        <text class="privilege-text">学习报告</text>
+      </view>
+      <view class="privilege-item">
+        <text class="privilege-icon">🎁</text>
+        <text class="privilege-text">优先客服</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 套餐选择 -->
+  <view class="section">
+    <view class="section-title">选择套餐</view>
+    <view class="package-list">
+      <view
+        wx:for="{{packages}}"
+        wx:key="id"
+        class="package-item {{item.recommended ? 'recommended' : ''}}"
+        bindtap="selectPackage"
+        data-id="{{item.id}}"
+      >
+        <view wx:if="{{item.recommended}}" class="recommended-tag">推荐</view>
+        <view class="package-header">
+          <text class="package-name">{{item.name}}</text>
+          <text class="package-duration">{{item.duration}}</text>
+        </view>
+        <view class="package-price">
+          <text class="price-symbol">¥</text>
+          <text class="price-num">{{item.price}}</text>
+          <text class="price-original">¥{{item.originalPrice}}</text>
+        </view>
+        <view class="package-features">
+          <text wx:for="{{item.features}}" wx:for-item="f" wx:key="{{index}}" class="feature-item">
+            ✓ {{f}}
+          </text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

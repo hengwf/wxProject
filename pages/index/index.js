@@ -4,17 +4,18 @@ const adManager = require('../../utils/adManager.js')
 Page({
   data: {
     categories: [],
+    userData: {},
     todayQuestions: 0,
     totalQuestions: 0,
-    totalLevels: 66,
+    correctRate: 0,
+    memberStatus: 'free',
     currentTip: '',
     tips: [
-      '遇到难题可以点击提示按钮获取帮助哦！',
-      '每关答对60%以上的题目即可通关',
-      '通关后可以解锁下一关',
-      '答错不会扣分，但会影响正确率',
-      '坚持每天答题，知识会越来越丰富！',
-      '关卡难度会逐渐增加，挑战自己吧！'
+      '遇到难题可以收藏，方便日后复习',
+      '模拟考试可以检验你的学习效果',
+      '坚持每天刷题，考试不再慌张',
+      '错题本是你的薄弱点，多复习',
+      '开通会员解锁全部题库和功能'
     ]
   },
 
@@ -37,10 +38,18 @@ Page({
   },
 
   refreshData: function () {
+    const userData = app.globalData.userData
+    const correctRate = userData.totalQuestions > 0
+      ? Math.round((userData.correctCount / userData.totalQuestions) * 100)
+      : 0
+
     this.setData({
       categories: app.globalData.categories,
-      todayQuestions: app.globalData.userData.todayQuestions,
-      totalQuestions: app.globalData.userData.totalQuestions,
+      userData: userData,
+      todayQuestions: userData.todayQuestions || 0,
+      totalQuestions: userData.totalQuestions || 0,
+      correctRate: correctRate,
+      memberStatus: userData.memberStatus || 'free',
       currentTip: this.data.tips[Math.floor(Math.random() * this.data.tips.length)]
     })
   },
@@ -50,30 +59,32 @@ Page({
     adManager.showBannerAd()
   },
 
-  getProgress: function (categoryId) {
-    const progress = app.globalData.userData.categoryProgress[categoryId]
-    if (progress) {
-      return (progress.completed / progress.total) * 100
-    }
-    return 0
+  goToChapters: function (e) {
+    const categoryId = e.currentTarget.dataset.category
+    wx.navigateTo({
+      url: `/pages/chapters/chapters?category=${categoryId}`
+    })
+  },
+
+  goToVip: function () {
+    wx.navigateTo({
+      url: '/pages/vip/vip'
+    })
   },
 
   getCategoryProgress: function (categoryId) {
-    const progress = app.globalData.userData.categoryProgress[categoryId]
+    const progress = app.globalData.userData.categories[categoryId]?.progress
     if (progress) {
       return `${progress.completed}/${progress.total}`
     }
-    return '0/10'
+    return '0/20'
   },
 
-  getUnlockedLevels: function (categoryId) {
-    return app.globalData.userData.unlockedLevels[categoryId] || 1
-  },
-
-  goToLevels: function (e) {
-    const categoryId = e.currentTarget.dataset.category
-    wx.navigateTo({
-      url: `/pages/levels/levels?category=${categoryId}`
-    })
+  getProgressPercent: function (categoryId) {
+    const progress = app.globalData.userData.categories[categoryId]?.progress
+    if (progress && progress.total > 0) {
+      return (progress.completed / progress.total) * 100
+    }
+    return 0
   }
 })

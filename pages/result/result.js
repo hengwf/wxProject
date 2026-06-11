@@ -3,36 +3,39 @@ const adManager = require('../../utils/adManager.js')
 Page({
   data: {
     categoryId: '',
-    level: 0,
+    chapter: 0,
     correctCount: 0,
     totalQuestions: 0,
     isPass: false,
     correctRate: 0,
-    adShown: false
+    adShown: false,
+    examMode: false
   },
 
   onLoad: function (options) {
     const categoryId = options.category
-    const level = parseInt(options.level)
+    const chapter = parseInt(options.chapter)
     const correctCount = parseInt(options.correct)
     const totalQuestions = parseInt(options.total)
     const isPass = options.pass === 'true'
+    const examMode = options.examMode === '1'
     const correctRate = Math.round((correctCount / totalQuestions) * 100)
 
     this.setData({
       categoryId: categoryId,
-      level: level,
+      chapter: chapter,
       correctCount: correctCount,
       totalQuestions: totalQuestions,
       isPass: isPass,
-      correctRate: correctRate
+      correctRate: correctRate,
+      examMode: examMode
     })
 
     this.initInterstitialAd()
   },
 
   onShow: function () {
-    if (!this.data.adShown) {
+    if (!this.data.adShown && !this.data.examMode) {
       this.delayShowAd()
     }
   },
@@ -61,29 +64,39 @@ Page({
 
   getComment: function () {
     const rate = this.data.correctRate
-    if (rate >= 100) return '完美！你是真正的学霸！'
+    if (rate >= 100) return '满分！太棒了！'
     if (rate >= 80) return '优秀！继续保持！'
-    if (rate >= 60) return '不错！再接再厉！'
+    if (rate >= 60) return '及格啦！再接再厉！'
     if (rate >= 40) return '加油！多练习会更好！'
     return '别灰心！知识需要积累！'
   },
 
   retry: function () {
     wx.redirectTo({
-      url: `/pages/quiz/quiz?category=${this.data.categoryId}&level=${this.data.level}`
+      url: `/pages/quiz/quiz?category=${this.data.categoryId}&chapter=${this.data.chapter}`
     })
   },
 
-  nextLevel: function () {
-    const nextLevel = this.data.level + 1
+  nextChapter: function () {
+    const nextChapter = this.data.chapter + 1
+    if (nextChapter > 10) {
+      wx.showToast({ title: '已是最后一章', icon: 'none' })
+      return
+    }
     wx.redirectTo({
-      url: `/pages/quiz/quiz?category=${this.data.categoryId}&level=${nextLevel}`
+      url: `/pages/quiz/quiz?category=${this.data.categoryId}&chapter=${nextChapter}`
     })
   },
 
-  backToLevels: function () {
+  backToChapters: function () {
     wx.redirectTo({
-      url: `/pages/levels/levels?category=${this.data.categoryId}`
+      url: `/pages/chapters/chapters?category=${this.data.categoryId}`
+    })
+  },
+
+  backToHome: function () {
+    wx.switchTab({
+      url: '/pages/index/index'
     })
   }
 })

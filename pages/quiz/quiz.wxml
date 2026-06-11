@@ -1,69 +1,72 @@
 <view class="container">
-  <view class="quiz-header">
-    <view class="progress-info">
-      <view class="progress-bar">
-        <view class="progress-fill" style="width: {{progressPercent}}%"></view>
-      </view>
-      <view class="progress-text">{{currentIndex + 1}}/{{totalQuestions}}</view>
-    </view>
-    <view class="score-info">
-      <text class="correct-icon">✓</text>
-      <text class="correct-count">{{correctCount}}</text>
-    </view>
+  <!-- 顶部进度 -->
+  <view class="progress-bar">
+    <view class="progress-fill" style="width: {{progressPercent}}%"></view>
+  </view>
+  <view class="progress-info">
+    <text class="progress-text">第 {{currentIndex + 1}} / {{totalQuestions}} 题</text>
+    <text wx:if="{{questionType === 'multiple'}}" class="type-tag">多选</text>
+    <text wx:elif="{{questionType === 'judge'}}" class="type-tag">判断</text>
   </view>
 
-  <view class="question-card card">
-    <view class="question-number">第 {{currentIndex + 1}} 题</view>
-    <view class="question-text">{{currentQuestion.question}}</view>
+  <!-- 题目内容 -->
+  <view class="question-card">
+    <text class="question-text">{{currentQuestion.question}}</text>
   </view>
 
+  <!-- 选项列表 -->
   <view class="options-list">
-    <view 
-      wx:for="{{currentQuestion.options}}" 
+    <view
+      wx:for="{{currentQuestion.options}}"
       wx:key="index"
-      class="option-item card {{getOptionClass(index)}}"
+      class="option-item {{selectedAnswer === index ? 'selected' : ''}} {{showResult && index === currentQuestion.answer ? 'correct' : ''}} {{showResult && selectedAnswer === index && index !== currentQuestion.answer ? 'wrong' : ''}}"
       bindtap="selectOption"
       data-index="{{index}}"
     >
-      <view class="option-letter">{{getLetter(index)}}</view>
-      <view class="option-text">{{item}}</view>
-      <view class="option-status">
-        <text wx:if="{{selectedAnswer === index && showResult}}" class="result-icon">
-          {{index === currentQuestion.answer ? '✓' : '✗'}}
-        </text>
+      <view class="option-letter {{selectedAnswer === index ? 'selected' : ''}} {{showResult && index === currentQuestion.answer ? 'correct' : ''}} {{showResult && selectedAnswer === index && index !== currentQuestion.answer ? 'wrong' : ''}}">
+        {{['A', 'B', 'C', 'D', 'E', 'F'][index]}}
       </view>
+      <text class="option-text">{{item}}</text>
     </view>
   </view>
 
-  <view class="explanation-card card" wx:if="{{showResult}}">
-    <view class="explanation-icon">💡</view>
-    <view class="explanation-content">
-      <view class="explanation-title">解析</view>
-      <view class="explanation-text">{{currentQuestion.explanation}}</view>
+  <!-- 底部操作区 -->
+  <view class="bottom-bar">
+    <view class="action-btn" bindtap="prevQuestion">上一题</view>
+    <view class="action-btn hint-btn" bindtap="showHint">提示</view>
+    <view class="action-btn collect-btn" bindtap="toggleCollect">收藏</view>
+  </view>
+
+  <view wx:if="{{!showResult}}" class="confirm-btn" bindtap="confirmAnswer">
+    <text>确认答案</text>
+  </view>
+
+  <view wx:else class="next-btn" bindtap="nextQuestion">
+    <text>{{currentIndex + 1 >= totalQuestions ? '查看结果' : '下一题'}}</text>
+  </view>
+
+  <!-- 结果反馈 -->
+  <view wx:if="{{showResult}}" class="result-card">
+    <view class="result-header">
+      <text class="result-icon {{quizResults[currentIndex].isCorrect ? 'correct' : 'wrong'}}">
+        {{quizResults[currentIndex].isCorrect ? '✅' : '❌'}}
+      </text>
+      <text class="result-text">{{quizResults[currentIndex].isCorrect ? '回答正确' : '回答错误'}}</text>
+    </view>
+    <view wx:if="{{currentQuestion.explanation}}" class="explanation">
+      <text class="exp-label">解析：</text>
+      <text class="exp-text">{{currentQuestion.explanation}}</text>
     </view>
   </view>
 
-  <view class="action-buttons">
-    <view class="hint-btn" bindtap="showHint">
-      <text class="hint-icon">💡</text>
-      <text class="hint-text">查看提示</text>
-    </view>
-    <view 
-      class="next-btn btn-primary" 
-      wx:if="{{showResult}}"
-      bindtap="nextQuestion"
-    >
-      {{currentIndex < totalQuestions - 1 ? '下一题' : '查看结果'}}
-    </view>
-  </view>
-
-  <view class="hint-modal" wx:if="{{showHintModal}}">
-    <view class="hint-content card">
-      <view class="hint-title">💡 提示</view>
-      <view class="hint-text">{{currentQuestion.hint}}</view>
-      <view class="hint-btn-area">
-        <view class="close-hint btn-secondary" bindtap="closeHint">关闭</view>
+  <!-- 提示弹窗 -->
+  <view wx:if="{{showHintModal}}" class="hint-modal" bindtap="closeHint">
+    <view class="hint-content" catchtap="stopPropagation">
+      <view class="hint-header">
+        <text class="hint-title">💡 提示</text>
+        <text class="hint-close" bindtap="closeHint">×</text>
       </view>
+      <text class="hint-text">{{currentQuestion.hint}}</text>
     </view>
   </view>
 </view>

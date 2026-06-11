@@ -1,33 +1,70 @@
 <view class="container">
   <view class="rules-card card">
-    <view class="rules-title">📋 游戏规则</view>
+    <view class="rules-title">📋 用户规则</view>
     
     <view class="rule-section">
-      <view class="section-header">🎮 基本玩法</view>
+      <view class="section-header">📚 题库说明</view>
       <view class="rule-list">
-        <view class="rule-item">• 选择题库分类，进入关卡列表</view>
-        <view class="rule-item">• 每个分类有10个关卡，逐级解锁</view>
-        <view class="rule-item">• 每关5道题目，每题4个选项</view>
-        <view class="rule-item">• 答对题目自动进入下一题</view>
+        <view class="rule-item">• 本小程序提供医学考试题库练习服务</view>
+        <view class="rule-item">• 涵盖执业药师、护士执业、执业医师三大类别</view>
+        <view class="rule-item">• 每个类别包含10个章节，每章100道题目</view>
+        <view class="rule-item">• 题目来源于历年真题和最新模拟题</view>
+      </view>
+    </view>
+
+    <view class="rule-section">
+      <view class="section-header">🎯 答题规则</view>
+      <view class="rule-list">
+        <view class="rule-item">• 选择科目和章节后进入答题模式</view>
+        <view class="rule-item">• 每题作答后点击「确认答案」查看结果</view>
+        <view class="rule-item">• 答错的题目自动加入错题本</view>
+        <view class="rule-item">• 可随时查看解析和提示</view>
       </view>
     </view>
 
     <view class="rule-section">
       <view class="section-header">✅ 通关条件</view>
       <view class="rule-list">
-        <view class="rule-item">• 每关正确率达到60%即可通关</view>
-        <view class="rule-item">• 通关后自动解锁下一关</view>
-        <view class="rule-item">• 失败可重新挑战当前关卡</view>
-        <view class="rule-item">• 所有关卡通关后解锁全部题库</view>
+        <view class="rule-item">• 每章正确率达到60%即可通关</view>
+        <view class="rule-item">• 通关后自动解锁下一章</view>
+        <view class="rule-item">• 支持无限次重新挑战</view>
+      </view>
+    </view>
+
+    <view class="rule-section">
+      <view class="section-header">📖 错题本</view>
+      <view class="rule-list">
+        <view class="rule-item">• 答错的题目自动收集到错题本</view>
+        <view class="rule-item">• 可单独练习错题，巩固知识点</view>
+        <view class="rule-item">• 答对后自动从错题本移除</view>
+      </view>
+    </view>
+
+    <view class="rule-section">
+      <view class="section-header">🎮 模拟考试</view>
+      <view class="rule-list">
+        <view class="rule-item">• 随机抽取100道题目进行模拟考试</view>
+        <view class="rule-item">• 限时60分钟完成</view>
+        <view class="rule-item">• 提供详细成绩分析报告</view>
       </view>
     </view>
 
     <view class="rule-section">
       <view class="section-header">💡 提示功能</view>
       <view class="rule-list">
-        <view class="rule-item">• 遇到难题可点击提示按钮</view>
-        <view class="rule-item">• 提示会给出答案线索</view>
-        <view class="rule-item">• 合理使用提示提高正确率</view>
+        <view class="rule-item">• 普通用户每天可使用3次提示</view>
+        <view class="rule-item">• VIP会员无限制使用提示功能</view>
+        <view class="rule-item">• 提示提供答案线索，帮助理解</view>
+      </view>
+    </view>
+
+    <view class="rule-section">
+      <view class="section-header">👑 VIP会员</view>
+      <view class="rule-list">
+        <view class="rule-item">• 解锁全部题库内容</view>
+        <view class="rule-item">• 无限次使用提示功能</view>
+        <view class="rule-item">• 去除广告干扰</view>
+        <view class="rule-item">• 专属客服支持</view>
       </view>
     </view>
 
@@ -35,22 +72,22 @@
       <view class="section-header">📊 数据统计</view>
       <view class="rule-list">
         <view class="rule-item">• 记录总答题数和正确率</view>
-        <view class="rule-item">• 记录各分类通关进度</view>
-        <view class="rule-item">• 数据本地存储，换设备可迁移</view>
+        <view class="rule-item">• 记录各章节通关进度</view>
+        <view class="rule-item">• 数据本地存储，保障隐私安全</view>
       </view>
     </view>
 
     <view class="rule-section">
-      <view class="section-header">🏆 成就系统</view>
+      <view class="section-header">⚠️ 注意事项</view>
       <view class="rule-list">
-        <view class="rule-item">• 完成更多关卡获得成就感</view>
-        <view class="rule-item">• 挑战高正确率获得评级</view>
-        <view class="rule-item">• 持续答题积累知识</view>
+        <view class="rule-item">• 本小程序仅供学习参考，不代表官方考试</view>
+        <view class="rule-item">• 最终考试以官方发布为准</view>
+        <view class="rule-item">• 请合理安排学习时间，避免过度使用</view>
       </view>
     </view>
   </view>
 
   <view class="back-btn btn-primary" bindtap="goBack">
-    返回首页
+    返回
   </view>
 </view>

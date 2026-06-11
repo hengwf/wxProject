@@ -1,0 +1,114 @@
+.container {
+  min-height: 100vh;
+  background: #f0f5f9;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  background: #fff;
+}
+
+.back-btn {
+  color: #1890ff;
+  font-size: 28rpx;
+  margin-right: 20rpx;
+}
+
+.category-info {
+  display: flex;
+  align-items: center;
+}
+
+.category-icon {
+  font-size: 40rpx;
+  margin-right: 12rpx;
+}
+
+.category-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.chapter-list {
+  padding: 30rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.chapter-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.05);
+}
+
+.chapter-item.locked {
+  opacity: 0.6;
+}
+
+.chapter-left {
+  display: flex;
+  align-items: center;
+}
+
+.chapter-num {
+  width: 60rpx;
+  height: 60rpx;
+  background: #1890ff;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-right: 20rpx;
+}
+
+.chapter-item.locked .chapter-num {
+  background: #ccc;
+}
+
+.chapter-item.completed .chapter-num {
+  background: #52c41a;
+}
+
+.chapter-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.chapter-name {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.chapter-questions {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 6rpx;
+}
+
+.chapter-right {
+  font-size: 28rpx;
+}
+
+.status-locked {
+  color: #ccc;
+}
+
+.status-done {
+  color: #52c41a;
+}
+
+.status-available {
+  color: #1890ff;
+}

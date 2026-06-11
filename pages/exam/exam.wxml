@@ -1,0 +1,67 @@
+<view class="container">
+  <!-- 选择分类 -->
+  <view class="section">
+    <view class="section-title">选择考试科目</view>
+    <view class="category-tabs">
+      <view
+        wx:for="{{categories}}"
+        wx:key="id"
+        class="category-tab {{selectedCategory === item.id ? 'active' : ''}}"
+        style="{{selectedCategory === item.id ? 'border-color:' + item.color : ''}}"
+        bindtap="selectCategory"
+        data-category="{{item.id}}"
+      >
+        <text class="tab-icon">{{item.icon}}</text>
+        <text class="tab-name">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 考试说明 -->
+  <view class="exam-info-card">
+    <view class="info-row">
+      <text class="info-label">题量</text>
+      <text class="info-value">{{examConfig.totalQuestions}} 题</text>
+    </view>
+    <view class="info-row">
+      <text class="info-label">时长</text>
+      <text class="info-value">{{examConfig.timeLimit}} 分钟</text>
+    </view>
+    <view class="info-row">
+      <text class="info-label">及格分</text>
+      <text class="info-value">{{examConfig.passScore}} 分</text>
+    </view>
+  </view>
+
+  <!-- VIP提示 -->
+  <view wx:if="{{!canStartExam}}" class="vip-tip" bindtap="goToVip">
+    <text class="vip-icon">👑</text>
+    <text class="vip-text">开通会员解锁模拟考试功能</text>
+    <text class="vip-arrow">></text>
+  </view>
+
+  <!-- 开始考试按钮 -->
+  <view wx:if="{{canStartExam}}" class="start-btn" bindtap="showExamModal">
+    <text>开始模拟考试</text>
+  </view>
+
+  <!-- 考试历史 -->
+  <view class="section" wx:if="{{examHistory.length > 0}}">
+    <view class="section-title">最近考试记录</view>
+    <view class="history-list">
+      <view
+        wx:for="{{examHistory}}"
+        wx:key="examTime"
+        class="history-item"
+      >
+        <view class="history-left">
+          <text class="history-category">{{item.categoryName}}</text>
+          <text class="history-date">{{item.examTime}}</text>
+        </view>
+        <view class="history-right">
+          <text class="history-score {{item.score >= examConfig.passScore ? 'pass' : 'fail'}}">{{item.score}}分</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

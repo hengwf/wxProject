@@ -1,23 +1,27 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/levels/levels",
+    "pages/chapters/chapters",
     "pages/quiz/quiz",
     "pages/result/result",
+    "pages/wrong/wrong",
+    "pages/exam/exam",
     "pages/mine/mine",
+    "pages/profile/profile",
+    "pages/vip/vip",
     "pages/privacy/privacy",
     "pages/rules/rules"
   ],
   "window": {
-    "backgroundColor": "#f5f7fa",
+    "backgroundColor": "#f0f5f9",
     "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#4a90d9",
-    "navigationBarTitleText": "益智闯关",
+    "navigationBarBackgroundColor": "#1890ff",
+    "navigationBarTitleText": "医考通",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#999999",
-    "selectedColor": "#4a90d9",
+    "selectedColor": "#1890ff",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
@@ -26,6 +30,18 @@
         "text": "首页",
         "iconPath": "images/tab/home.png",
         "selectedIconPath": "images/tab/home-active.png"
+      },
+      {
+        "pagePath": "pages/wrong/wrong",
+        "text": "错题本",
+        "iconPath": "images/tab/wrong.png",
+        "selectedIconPath": "images/tab/wrong-active.png"
+      },
+      {
+        "pagePath": "pages/exam/exam",
+        "text": "模考",
+        "iconPath": "images/tab/exam.png",
+        "selectedIconPath": "images/tab/exam-active.png"
       },
       {
         "pagePath": "pages/mine/mine",

@@ -1,0 +1,169 @@
+.container {
+  min-height: 100vh;
+  background: #f0f5f9;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  background: #fff;
+}
+
+.back-btn {
+  color: #1890ff;
+  font-size: 28rpx;
+  margin-right: 20rpx;
+}
+
+.header-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.member-status-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #fa8c16, #ff6b00);
+  color: #fff;
+  padding: 60rpx 30rpx;
+  margin: 30rpx;
+  border-radius: 20rpx;
+}
+
+.member-icon {
+  font-size: 80rpx;
+  margin-bottom: 20rpx;
+}
+
+.member-text {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.member-expire {
+  font-size: 26rpx;
+  opacity: 0.9;
+}
+
+.section {
+  padding: 0 30rpx 40rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.privilege-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20rpx;
+}
+
+.privilege-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  padding: 30rpx 20rpx;
+  border-radius: 16rpx;
+}
+
+.privilege-icon {
+  font-size: 40rpx;
+  margin-bottom: 10rpx;
+}
+
+.privilege-text {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.package-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.package-item {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  position: relative;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.05);
+}
+
+.package-item.recommended {
+  border: 4rpx solid #fa8c16;
+}
+
+.recommended-tag {
+  position: absolute;
+  top: -20rpx;
+  right: 30rpx;
+  background: linear-gradient(135deg, #fa8c16, #ff6b00);
+  color: #fff;
+  padding: 8rpx 24rpx;
+  border-radius: 20rpx;
+  font-size: 22rpx;
+}
+
+.package-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.package-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.package-duration {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.package-price {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 20rpx;
+}
+
+.price-symbol {
+  font-size: 28rpx;
+  color: #ff6b00;
+  font-weight: bold;
+}
+
+.price-num {
+  font-size: 56rpx;
+  color: #ff6b00;
+  font-weight: bold;
+}
+
+.price-original {
+  font-size: 26rpx;
+  color: #ccc;
+  text-decoration: line-through;
+  margin-left: 12rpx;
+}
+
+.package-features {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.feature-item {
+  font-size: 26rpx;
+  color: #666;
+}

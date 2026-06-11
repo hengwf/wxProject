@@ -5,8 +5,10 @@ Page({
     userData: {},
     categories: [],
     correctRate: 0,
-    totalCompletedLevels: 0,
-    totalUnlockedLevels: 0
+    totalCompletedChapters: 0,
+    memberStatus: 'free',
+    wrongCount: 0,
+    collectCount: 0
   },
 
   onLoad: function () {
@@ -22,48 +24,43 @@ Page({
 
   loadUserData: function () {
     const userData = app.globalData.userData
-    const correctRate = userData.totalQuestions > 0 
-      ? Math.round((userData.correctCount / userData.totalQuestions) * 100) 
+    const correctRate = userData.totalQuestions > 0
+      ? Math.round((userData.correctCount / userData.totalQuestions) * 100)
       : 0
-    
+
     let totalCompleted = 0
-    let totalUnlocked = 0
-    for (const key in userData.completedLevels) {
-      if (userData.completedLevels[key]) {
-        totalCompleted++
+    for (const catKey in userData.categories) {
+      const cat = userData.categories[catKey]
+      if (cat.completedChapters) {
+        totalCompleted += Object.keys(cat.completedChapters).length
       }
-    }
-    for (const key in userData.unlockedLevels) {
-      totalUnlocked += userData.unlockedLevels[key]
     }
 
     this.setData({
       userData: userData,
       correctRate: correctRate,
-      totalCompletedLevels: totalCompleted,
-      totalUnlockedLevels: totalUnlocked
+      totalCompletedChapters: totalCompleted,
+      memberStatus: userData.memberStatus || 'free',
+      wrongCount: userData.wrongQuestions?.length || 0,
+      collectCount: userData.collectedQuestions?.length || 0
     })
   },
 
-  getCategoryProgress: function (categoryId) {
-    const progress = this.data.userData.categoryProgress[categoryId]
-    if (progress) {
-      return `${progress.completed}/${progress.total}`
-    }
-    return '0/10'
-  },
-
-  getProgressPercent: function (categoryId) {
-    const progress = this.data.userData.categoryProgress[categoryId]
-    if (progress) {
-      return (progress.completed / progress.total) * 100
-    }
-    return 0
+  goToVip: function () {
+    wx.navigateTo({
+      url: '/pages/vip/vip'
+    })
   },
 
   goToRules: function () {
     wx.navigateTo({
       url: '/pages/rules/rules'
+    })
+  },
+
+  goToProfile: function () {
+    wx.navigateTo({
+      url: '/pages/profile/profile'
     })
   },
 
@@ -73,10 +70,16 @@ Page({
     })
   },
 
+  goToWrong: function () {
+    wx.switchTab({
+      url: '/pages/wrong/wrong'
+    })
+  },
+
   showAbout: function () {
     wx.showModal({
       title: '关于我们',
-      content: '益智闯关 v1.0.0\n\n一款轻松有趣的百科闯关益智答题小程序，涵盖生活常识、影视娱乐、历史人文、综合知识海量题库。逐级闯关解锁全新题目，遇到难题可观看提示轻松通关。休闲解压、增长知识、老少皆宜！',
+      content: '医考通 v1.0.0\n\n专注医学考试题库，涵盖执业药师、护士、医师等海量题库。\n\n支持章节练习、模拟考试、错题本等功能。',
       showCancel: false
     })
   },
@@ -84,7 +87,7 @@ Page({
   clearData: function () {
     wx.showModal({
       title: '确认清除',
-      content: '确定要清除所有答题数据吗？此操作不可恢复。',
+      content: '确定要清除所有学习数据吗？此操作不可恢复。',
       success: (res) => {
         if (res.confirm) {
           wx.removeStorageSync('userData')
@@ -97,5 +100,12 @@ Page({
         }
       }
     })
+  },
+
+  getMemberStatusText: function () {
+    if (this.data.memberStatus === 'vip') {
+      return 'VIP会员'
+    }
+    return '普通用户'
   }
 })

@@ -1,52 +1,39 @@
 <view class="container">
-  <view class="result-card card" style="background: {{isPass ? 'linear-gradient(135deg, #52c41a 0%, #389e0d 100%)' : 'linear-gradient(135deg, #fa8c16 0%, #d46b08 100%)'}}">
-    <view class="result-icon">{{isPass ? '🎉' : '💪'}}</view>
-    <view class="result-title">{{isPass ? '恭喜通关！' : '再接再厉！'}}</view>
-    <view class="result-sub">{{isPass ? '成功解锁下一关' : '正确率未达标，请重试'}}</view>
+  <!-- 结果展示 -->
+  <view class="result-card">
+    <view class="result-icon {{isPass ? 'pass' : 'fail'}}">
+      {{isPass ? '🎉' : '😢'}}
+    </view>
+    <text class="result-title">{{isPass ? '恭喜通关！' : '继续加油！'}}</text>
+    <text class="result-stars">{{getStars()}}</text>
+    <text class="result-comment">{{getComment()}}</text>
   </view>
 
-  <view class="stats-card card">
+  <!-- 成绩统计 -->
+  <view class="stats-card">
     <view class="stats-row">
-      <view class="stat-item">
-        <view class="stat-value">{{correctCount}}</view>
-        <view class="stat-label">答对题数</view>
-      </view>
-      <view class="stat-divider"></view>
-      <view class="stat-item">
-        <view class="stat-value">{{totalQuestions}}</view>
-        <view class="stat-label">总题数</view>
-      </view>
-      <view class="stat-divider"></view>
-      <view class="stat-item">
-        <view class="stat-value">{{correctRate}}%</view>
-        <view class="stat-label">正确率</view>
-      </view>
+      <text class="stats-label">正确率</text>
+      <text class="stats-value {{isPass ? 'pass' : 'fail'}}">{{correctRate}}%</text>
+    </view>
+    <view class="stats-row">
+      <text class="stats-label">答对题数</text>
+      <text class="stats-value">{{correctCount}} / {{totalQuestions}}</text>
     </view>
   </view>
 
-  <view class="rate-card card">
-    <view class="rate-title">评级</view>
-    <view class="rate-stars">{{getStars()}}</view>
-    <view class="rate-comment">{{getComment()}}</view>
-  </view>
-
-  <view class="action-buttons">
-    <view class="btn-secondary retry-btn" bindtap="retry">
-      <text>🔄 重新挑战</text>
+  <!-- 操作按钮 -->
+  <view class="action-list">
+    <view class="action-btn primary" bindtap="retry">
+      <text>重新挑战</text>
     </view>
-    <view 
-      class="btn-primary next-btn" 
-      wx:if="{{isPass}}"
-      bindtap="nextLevel"
-    >
-      <text>▶ 下一关</text>
+    <view wx:if="{{isPass}}" class="action-btn" bindtap="nextChapter">
+      <text>下一章</text>
     </view>
-    <view 
-      class="btn-primary next-btn" 
-      wx:else
-      bindtap="backToLevels"
-    >
-      <text>← 返回关卡</text>
+    <view class="action-btn" bindtap="backToChapters">
+      <text>章节列表</text>
+    </view>
+    <view class="action-btn" bindtap="backToHome">
+      <text>返回首页</text>
     </view>
   </view>
 </view>

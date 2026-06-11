@@ -1,0 +1,162 @@
+.container {
+  min-height: 100vh;
+  background: #f0f5f9;
+  padding: 30rpx;
+}
+
+.section {
+  margin-bottom: 40rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.category-tabs {
+  display: flex;
+  gap: 20rpx;
+}
+
+.category-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  border: 4rpx solid transparent;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.05);
+}
+
+.category-tab.active {
+  background: #fff;
+}
+
+.tab-icon {
+  font-size: 48rpx;
+  margin-bottom: 12rpx;
+}
+
+.tab-name {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.category-tab.active .tab-name {
+  color: #1890ff;
+}
+
+.exam-info-card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.05);
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.info-value {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.vip-tip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #fa8c16, #ff6b00);
+  color: #fff;
+  padding: 30rpx;
+  border-radius: 16rpx;
+  margin-bottom: 30rpx;
+}
+
+.vip-icon {
+  font-size: 36rpx;
+  margin-right: 12rpx;
+}
+
+.vip-text {
+  flex: 1;
+  font-size: 28rpx;
+}
+
+.vip-arrow {
+  font-size: 28rpx;
+}
+
+.start-btn {
+  background: linear-gradient(135deg, #1890ff, #096dd9);
+  color: #fff;
+  text-align: center;
+  padding: 30rpx;
+  border-radius: 16rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 30rpx;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 24rpx;
+}
+
+.history-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.history-category {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.history-date {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 6rpx;
+}
+
+.history-score {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.history-score.pass {
+  color: #52c41a;
+}
+
+.history-score.fail {
+  color: #ff4d4f;
+}

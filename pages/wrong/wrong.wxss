@@ -1,0 +1,111 @@
+.container {
+  min-height: 100vh;
+  background: #f0f5f9;
+  padding: 30rpx;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 200rpx;
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 30rpx;
+}
+
+.empty-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16rpx;
+}
+
+.empty-desc {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.wrong-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.list-count {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.clear-btn {
+  font-size: 28rpx;
+  color: #ff4d4f;
+}
+
+.wrong-item {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.05);
+}
+
+.wrong-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+
+.wrong-category {
+  font-size: 24rpx;
+  color: #1890ff;
+  background: #e6f7ff;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.wrong-chapter {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.wrong-question {
+  font-size: 30rpx;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 20rpx;
+}
+
+.wrong-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.wrong-option {
+  font-size: 26rpx;
+  color: #666;
+  padding: 10rpx 0;
+}
+
+.wrong-actions {
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #eee;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.remove-btn {
+  font-size: 26rpx;
+  color: #ff4d4f;
+}

@@ -1,0 +1,80 @@
+<view class="container">
+  <!-- 头像编辑区 -->
+  <view class="avatar-section">
+    <view class="avatar-wrapper">
+      <view class="avatar-display">{{userData.avatar}}</view>
+      <view class="avatar-edit" bindtap="chooseAvatar">
+        <text class="edit-icon">📷</text>
+      </view>
+    </view>
+    <text class="avatar-tip">点击更换头像</text>
+  </view>
+
+  <!-- 昵称编辑区 -->
+  <view class="field-section">
+    <view class="field-label">昵称</view>
+    <view class="field-input-wrapper">
+      <input 
+        class="field-input" 
+        placeholder="请输入昵称" 
+        value="{{userData.nickname || ''}}"
+        bindinput="onNicknameInput"
+        maxlength="20"
+      />
+    </view>
+  </view>
+
+  <!-- 个人简介 -->
+  <view class="field-section">
+    <view class="field-label">个人简介</view>
+    <view class="field-textarea-wrapper">
+      <textarea 
+        class="field-textarea" 
+        placeholder="介绍一下自己吧..." 
+        value="{{userData.bio}}"
+        bindinput="onBioInput"
+        maxlength="100"
+        auto-height
+      />
+      <view class="char-count">{{bioLength}}/100</view>
+    </view>
+  </view>
+
+  <!-- 备考目标 -->
+  <view class="field-section">
+    <view class="field-label">备考目标</view>
+    <view class="goal-list">
+      <view 
+        wx:for="{{goalList}}" 
+        wx:key="id"
+        class="goal-item {{userData.goal === item.id ? 'selected' : ''}}"
+        bindtap="chooseGoal"
+        data-id="{{item.id}}"
+      >
+        <text class="goal-text">{{item.name}}</text>
+        <view wx:if="{{userData.goal === item.id}}" class="goal-check">✓</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 保存按钮 -->
+  <view class="save-btn" bindtap="saveProfile">
+    <text>保存修改</text>
+  </view>
+
+  <!-- 快捷头像 -->
+  <view class="quick-avatar-section">
+    <view class="section-title">快捷头像</view>
+    <view class="quick-avatar-list">
+      <view 
+        wx:for="{{avatarList}}" 
+        wx:key="index"
+        class="quick-avatar-item {{userData.avatar === item ? 'selected' : ''}}"
+        bindtap="selectAvatar"
+        data-avatar="{{item}}"
+      >
+        <text>{{item}}</text>
+      </view>
+    </view>
+  </view>
+</view>
